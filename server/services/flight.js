@@ -34,8 +34,8 @@ module.exports = {
 
     const result = [];
     for (const code of matchingCodes) {
-      let match = flights.find(f => (!date || f.date === date) && f.code === code.code);
-      if (match) {
+      let matches = flights.filter(f => (!date || f.date === date) && f.code === code.code);
+      for (const match of matches) {
         result.push(map(match, code));
       }
     }
@@ -43,16 +43,36 @@ module.exports = {
     return result;
   },
 
-  async addFlight(from, to, departureTime) {
+  async addFlight(flight) {
+    if (!flight.code) {
+      throw 'Flug kann nicht angelegt werden. Es wurde kein Flug Code geliefert.';
+    }
+    
+    const code = await codes.findCode(flight.code);
+
+    if (!code) {
+      throw `Flug kann nicht angelegt werden. Der Code ${flight.code} existiert nicht.`;
+    }
+
+    const alreadyExistingFlight = flights.find(f => f.code === flight.code && f.date === flight.date);
+
+    if (alreadyExistingFlight) {
+      throw { message: 'Der Flug existiert bereits.', flight: alreadyExistingFlight };
+    }
+
     const newFlight = {
       id: uuid(),
-      from: from,
-      to: to,
-      departureTime: departureTime
+      code: code.code,
+      date: flight.date,
+      aircraft: flight.aircraft
     };
 
     flights.push(newFlight);
     
-    return newFlight;
+    return map(newFlight, code);
+  },
+
+  async findFlightByCode(code, date) {
+    return flights.find(f => f.code === code && f.date === date);
   }
 }
