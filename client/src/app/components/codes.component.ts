@@ -10,6 +10,10 @@ import { Code } from '../models/code';
 @Component({
   selector: 'app-codes',
   template: `
+  <div class="loading-box" *ngIf="loading$ | async">
+    <md-progress-spinner mode="indeterminate">Loading Codes ...</md-progress-spinner>
+    <span>Loading Codes ...</span>
+  </div>
   <md-list *ngIf="(codes$ | async)">
     <md-list-item class="header-row">
       <div class="code-col">
@@ -69,13 +73,24 @@ md-list-item div span {
 .header-row {
   font-weight: bold;
 }
+.loading-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.loading-box span {
+  font-size: 18px;
+  font-family: Roboto,"Helvetica Neue",sans-serif;
+}
   `
 ]
 })
 export class CodesComponent {
   codes$: Observable<Code[]>;
+  loading$: Observable<boolean>;
 
   constructor(private store: Store<fromRoot.State>) { 
     this.codes$ = this.store.select(fromRoot.getCodes);
+    this.loading$ = this.store.select(fromRoot.getCodesLoading);
   }
 }

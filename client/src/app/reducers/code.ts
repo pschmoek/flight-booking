@@ -38,3 +38,5 @@ export function reducer(state = initialState, action: code.Actions): State {
 }
 
 export const getCodes = (state: State) => state.codes;
+export const getCodesLoaded = (state: State) => state.loaded;
+export const getCodesLoading = (state: State) => state.loading;

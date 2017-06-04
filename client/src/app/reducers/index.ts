@@ -21,3 +21,5 @@ export function reducer(state: any, action: any) {
 
 export const getCodeState = (state: State) => state.code;
 export const getCodes = createSelector(getCodeState, fromCode.getCodes);
+export const getCodesLoaded = createSelector(getCodeState, fromCode.getCodesLoaded);
+export const getCodesLoading = createSelector(getCodeState, fromCode.getCodesLoading);
