@@ -8,6 +8,8 @@ export class DepartureTimePipe implements PipeTransform {
       return '';
     }
 
-    return moment('2000-01-01T' + time).format('HH:mm:ss');
+    const today = moment().format('YYYY-MM-DD');
+
+    return moment(`${today}T${time}`).format('HH:mm:ss');
   }
 }
