@@ -1,12 +1,11 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { FormGroup } from '@angular/forms';
 
 import { Code } from '../../models/code';
 
 @Component({
   selector: 'app-code-grid',
   template: `
-<md-grid-list  cols="6" rowHeight="40px">
+<md-grid-list cols="6" rowHeight="40px">
 
   <md-grid-tile class="header"><div></div></md-grid-tile>
   <md-grid-tile class="header"><div>Code</div></md-grid-tile>
@@ -28,45 +27,10 @@ import { Code } from '../../models/code';
     <md-grid-tile><div>{{code.time | departureTime}}</div></md-grid-tile>
   </ng-container>
 
-  <md-grid-tile rowspan="2">
-    <button md-icon-button (click)="emitAddCode()">
-      <i class="material-icons">add</i>
+  <md-grid-tile colspan="6" class="add-new-code">
+    <button style="width: 100%" md-button (click)="addNewCodeClick.emit()">
+      Add New Code
     </button>
-  </md-grid-tile>
-  <md-grid-tile rowspan="2">
-    <div>
-      <md-input-container>
-        <input (keyup.enter)="emitAddCode()" mdInput placeholder="Code">
-      </md-input-container>
-    </div>
-  </md-grid-tile>
-  <md-grid-tile rowspan="2">
-    <div>
-      <md-input-container>
-        <input (keyup.enter)="emitAddCode()" mdInput placeholder="From">
-      </md-input-container>
-    </div>
-  </md-grid-tile>
-  <md-grid-tile rowspan="2">
-    <div>
-      <md-input-container>
-        <input (keyup.enter)="emitAddCode()" mdInput placeholder="To">
-      </md-input-container>
-    </div>
-  </md-grid-tile>
-  <md-grid-tile rowspan="2">
-    <div>
-      <md-input-container>
-        <input (keyup.enter)="emitAddCode()" mdInput placeholder="Airline">
-      </md-input-container>
-    </div>
-  </md-grid-tile>
-  <md-grid-tile rowspan="2">
-    <div>
-      <md-input-container>
-        <input (keyup.enter)="emitAddCode()" mdInput placeholder="Departure">
-      </md-input-container>
-    </div>
   </md-grid-tile>
 </md-grid-list>
   `,
@@ -84,14 +48,13 @@ md-grid-tile div {
   align-items: center;
   display: flex;  
 }
+.add-new-code button {
+  font-size: 17px;
+}
   `]
 })
 export class CodeGridComponent {
   @Input() codes: Code[];
   @Output() deleteCode = new EventEmitter<Code>();
-  @Output() addNewCode = new EventEmitter<Code>();
-
-  emitAddCode() {
-    this.addNewCode.emit(null);
-  }
+  @Output() addNewCodeClick = new EventEmitter();
 }

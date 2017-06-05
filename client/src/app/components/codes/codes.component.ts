@@ -12,7 +12,8 @@ import { Code } from '../../models/code';
   template: `
   <app-spinner *ngIf="loading$ | async" text="Loading Codes..."></app-spinner>
   <app-code-grid *ngIf="codes$ | async" [codes]="codes$ | async"
-    (deleteCode)="onDelete($event)"></app-code-grid>
+    (deleteCode)="onDelete($event)" (addNewCodeClick)="onAddNewCodeClick()">
+  </app-code-grid>
   `
 })
 export class CodesComponent implements OnInit {
@@ -26,6 +27,10 @@ export class CodesComponent implements OnInit {
 
   onDelete(c) {
     this.store.dispatch(new code.DeleteAction(c));
+  }
+
+  onAddNewCodeClick() {
+    console.log('TODO');
   }
 
   ngOnInit() {
