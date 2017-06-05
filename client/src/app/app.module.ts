@@ -29,6 +29,7 @@ import { CodeGridComponent } from './components/codes/code-grid.component';
 import { AddCodeDialogComponent } from './components/add-code-dialog/add-code-dialog.component';
 import { CodeDialogEffects } from './effects/code-dialog';
 import { TransformTimeService } from './services/transform-time.service';
+import { FlightsComponent } from './components/flights/flights.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { TransformTimeService } from './services/transform-time.service';
     DepartureTimePipe,
     SpinnerComponent,
     CodeGridComponent,
-    AddCodeDialogComponent
+    AddCodeDialogComponent,
+    FlightsComponent
   ],
   imports: [
     BrowserModule,

@@ -10,10 +10,9 @@ import * as fromRoot from './reducers';
 <md-toolbar color="primary">
   <a md-button [routerLink]="['/']">Overview</a>
   <a md-button [routerLink]="['/codes']">Codes</a>
+  <a md-button [routerLink]="['/flights']">Flights</a>
 </md-toolbar>
 <router-outlet></router-outlet>
-  `,
-  styles: [`
-  `]
+  `
 })
 export class AppComponent { }
