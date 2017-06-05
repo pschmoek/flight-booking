@@ -10,6 +10,6 @@ export class DepartureTimePipe implements PipeTransform {
 
     const today = moment().format('YYYY-MM-DD');
 
-    return moment(`${today}T${time}`).format('HH:mm:ss');
+    return moment(`${today}T${time}`).format('HH:mm');
   }
 }
