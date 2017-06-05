@@ -5,6 +5,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 
 import * as fromRoot from '../../reducers';
 import * as code from '../../actions/code';
+import * as codeDialog from '../../actions/code-dialog';
 import { Code } from '../../models/code';
 
 @Component({
@@ -20,7 +21,7 @@ export class CodesComponent implements OnInit {
   codes$: Observable<Code[]>;
   loading$: Observable<boolean>;
 
-  constructor(private store: Store<fromRoot.State>) { 
+  constructor(private store: Store<fromRoot.State>) {
     this.codes$ = this.store.select(fromRoot.getCodes);
     this.loading$ = this.store.select(fromRoot.getCodesLoading);
   }
@@ -30,7 +31,7 @@ export class CodesComponent implements OnInit {
   }
 
   onAddNewCodeClick() {
-    console.log('TODO');
+    this.store.dispatch(new codeDialog.OpenDialogAction());
   }
 
   ngOnInit() {

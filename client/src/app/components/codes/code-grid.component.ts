@@ -46,7 +46,7 @@ md-grid-tile div {
   width: 100%;
   height: 100%;
   align-items: center;
-  display: flex;  
+  display: flex;
 }
 .add-new-code button {
   font-size: 17px;

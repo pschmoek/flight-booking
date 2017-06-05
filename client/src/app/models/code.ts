@@ -1,5 +1,5 @@
 export interface Code {
-  id: string;
+  id?: string;
   code: string;
   airline: string;
   from: string;

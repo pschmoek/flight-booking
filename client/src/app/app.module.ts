@@ -6,7 +6,8 @@ import { MdToolbarModule,
   MdListModule,
   MdProgressSpinnerModule,
   MdGridListModule,
-  MdInputModule
+  MdInputModule,
+  MdDialogModule
 } from '@angular/material';
 import { RouterModule } from '@angular/router';
 import { StoreModule } from '@ngrx/store';
@@ -25,6 +26,9 @@ import { CodeEffects } from './effects/code';
 import { DepartureTimePipe } from './pipes/departure-time.pipe';
 import { SpinnerComponent } from './components/codes/spinner.component';
 import { CodeGridComponent } from './components/codes/code-grid.component';
+import { AddCodeDialogComponent } from './components/add-code-dialog/add-code-dialog.component';
+import { CodeDialogEffects } from './effects/code-dialog';
+import { TransformTimeService } from './services/transform-time.service';
 
 @NgModule({
   declarations: [
@@ -33,25 +37,31 @@ import { CodeGridComponent } from './components/codes/code-grid.component';
     OverviewComponent,
     DepartureTimePipe,
     SpinnerComponent,
-    CodeGridComponent
+    CodeGridComponent,
+    AddCodeDialogComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     HttpModule,
+    ReactiveFormsModule,
     MdToolbarModule,
     MdButtonModule,
     MdListModule,
     MdProgressSpinnerModule,
     MdGridListModule,
     MdInputModule,
+    MdDialogModule,
     RouterModule.forRoot(routes),
     StoreModule.provideStore(reducer),
     StoreDevtoolsModule.instrumentOnlyWithExtension(),
     EffectsModule.run(CodeEffects),
-    ReactiveFormsModule
+    EffectsModule.run(CodeDialogEffects)
   ],
-  providers: [CodeService],
+  providers: [CodeService, TransformTimeService],
+  entryComponents: [
+    AddCodeDialogComponent
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

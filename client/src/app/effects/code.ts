@@ -3,10 +3,13 @@ import { Actions, Effect } from '@ngrx/effects';
 import { Action } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/skip';
+import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/takeUntil';
 import 'rxjs/add/observable/empty';
+import 'rxjs/add/observable/from';
 
 import * as code from '../actions/code';
+import * as codeDialog from '../actions/code-dialog';
 import { CodeService } from '../services/code.service'
 
 @Injectable()
@@ -39,8 +42,9 @@ export class CodeEffects {
     .ofType(code.SAVE)
     .switchMap(a => {
       return this.codeService.save(a.payload)
-        .map(c => new code.SaveSuccessAction(c))
-        .catch(e => Observable.empty());        
+        .mergeMap(c => Observable.from([new code.SaveSuccessAction(c),
+          new codeDialog.CloseDialogAction()])
+        ).catch(e => Observable.empty());
     });
 
   constructor(private actions$: Actions, private codeService: CodeService) { }
