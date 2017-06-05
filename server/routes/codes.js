@@ -25,4 +25,13 @@ router.post('/', async (req, res) => {
   }
 });
 
+router.delete('/:id', async (req,res) => {
+  try {
+    const code = await backend.delete(req.params.id);
+    res.json(code);
+  } catch (e) {
+    res.status(400).json(e);
+  }
+});
+
 module.exports = router;

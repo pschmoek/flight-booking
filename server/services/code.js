@@ -40,5 +40,16 @@ module.exports = {
     codes.push(newCode);
 
     return newCode;
+  },
+
+  async delete(id) {
+    const codeToDelete = codes.find(c => c.id === id);
+    if (!codeToDelete) {
+      throw 'Code existiert nicht.';
+    }
+
+    codes.splice(codes.indexOf(codeToDelete), 1);
+
+    return codeToDelete;
   }
 };
