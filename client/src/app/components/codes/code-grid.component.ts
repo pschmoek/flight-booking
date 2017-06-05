@@ -1,20 +1,11 @@
-import { Component } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs/Observable';
-import * as moment from 'moment';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
-import * as fromRoot from '../reducers';
-import * as code from '../actions/code';
-import { Code } from '../models/code';
+import { Code } from '../../models/code';
 
 @Component({
-  selector: 'app-codes',
+  selector: 'app-code-grid',
   template: `
-  <div class="loading-box" *ngIf="loading$ | async">
-    <md-progress-spinner mode="indeterminate">Loading Codes ...</md-progress-spinner>
-    <span>Loading Codes ...</span>
-  </div>
-  <md-grid-list *ngIf="(codes$ | async)" cols="6" rowHeight="40px">
+  <md-grid-list  cols="6" rowHeight="40px">
   
     <md-grid-tile class="header"><div class="header"></div></md-grid-tile>
     <md-grid-tile class="header"><div class="header">Code</div></md-grid-tile>
@@ -23,9 +14,9 @@ import { Code } from '../models/code';
     <md-grid-tile class="header"><div class="header">Airline</div></md-grid-tile>
     <md-grid-tile class="header"><div class="header">Departure</div></md-grid-tile>
 
-    <ng-container *ngFor="let code of (codes$ | async)">
+    <ng-container *ngFor="let code of codes">
       <md-grid-tile>
-        <button md-icon-button (click)="onDelete(code)">
+        <button md-icon-button (click)="deleteCode.emit(code)">
           <i class="material-icons">delete</i>
         </button>
       </md-grid-tile>
@@ -37,7 +28,8 @@ import { Code } from '../models/code';
     </ng-container>
 
   </md-grid-list>
-  `, styles: [`
+  `,
+  styles: [`
 md-grid-tile {
   font-size: 18px;
   font-family: Roboto,"Helvetica Neue",sans-serif;
@@ -52,28 +44,9 @@ md-grid-tile div {
   align-items: center;
   display: flex;  
 }
-.loading-box {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.loading-box span {
-  font-size: 18px;
-  font-family: Roboto,"Helvetica Neue",sans-serif;
-}
-  `
-]
+  `]
 })
-export class CodesComponent {
-  codes$: Observable<Code[]>;
-  loading$: Observable<boolean>;
-
-  constructor(private store: Store<fromRoot.State>) { 
-    this.codes$ = this.store.select(fromRoot.getCodes);
-    this.loading$ = this.store.select(fromRoot.getCodesLoading);
-  }
-
-  onDelete(c) {
-    this.store.dispatch(new code.DeleteAction(c));
-  }
+export class CodeGridComponent {
+  @Input() codes: Code[];
+  @Output() deleteCode = new EventEmitter<Code>();
 }

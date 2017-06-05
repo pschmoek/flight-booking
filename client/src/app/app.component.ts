@@ -9,17 +9,11 @@ import * as fromRoot from './reducers';
   template: `
 <md-toolbar color="primary">
   <a md-button [routerLink]="['/']">Overview</a>
-  <a md-button [routerLink]="['/codes']" (click)="onCodesClick()">Codes</a>
+  <a md-button [routerLink]="['/codes']">Codes</a>
 </md-toolbar>
 <router-outlet></router-outlet>
   `,
   styles: [`
   `]
 })
-export class AppComponent {
-  constructor(private store: Store<fromRoot.State>) { }
-
-  onCodesClick() {
-    this.store.dispatch(new code.LoadAction());
-  }
-}
+export class AppComponent { }

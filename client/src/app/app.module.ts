@@ -10,19 +10,23 @@ import { HttpModule } from '@angular/http';
 
 import { routes } from './routes';
 import { AppComponent } from './app.component';
-import { CodesComponent } from './components/codes.component';
+import { CodesComponent } from './components/codes/codes.component';
 import { OverviewComponent } from './components/overview.component';
 import { reducer } from './reducers';
 import { CodeService } from './services/code.service';
 import { CodeEffects } from './effects/code';
 import { DepartureTimePipe } from './pipes/departure-time.pipe';
+import { SpinnerComponent } from './components/codes/spinner.component';
+import { CodeGridComponent } from './components/codes/code-grid.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CodesComponent,
     OverviewComponent,
-    DepartureTimePipe
+    DepartureTimePipe,
+    SpinnerComponent,
+    CodeGridComponent
   ],
   imports: [
     BrowserModule,
