@@ -31,6 +31,17 @@ export function reducer(state = initialState, action: code.Actions): State {
       };
     }
 
+    case code.DELETE_SUCCESS: {
+      const newCodes = [...state.codes];
+      newCodes.splice(newCodes.indexOf(action.payload), 1);
+      
+      return {
+        codes: newCodes,
+        loaded: state.loaded,
+        loading: state.loading
+      }
+    }
+
     default: {
       return state;
     }

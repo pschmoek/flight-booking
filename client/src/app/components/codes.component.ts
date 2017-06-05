@@ -16,6 +16,9 @@ import { Code } from '../models/code';
   </div>
   <md-list *ngIf="(codes$ | async)">
     <md-list-item class="header-row">
+      <div class="actions-col">
+        <span>&nbsp;</span>
+      </div>
       <div class="code-col">
         <span>Code</span>
       </div>
@@ -32,7 +35,12 @@ import { Code } from '../models/code';
         <span>Departure</span>
       </div>
     </md-list-item>
-    <md-list-item *ngFor="let code of (codes$ | async)">
+    <md-list-item style="height: 25px" *ngFor="let code of (codes$ | async)">
+      <div class="actions-col">
+        <button md-icon-button (click)="onDelete(code)">
+          <i class="material-icons">delete</i>
+        </button>
+      </div>
       <div class="code-col">
         <span>{{ code.code }}</span>
       </div>
@@ -63,6 +71,9 @@ import { Code } from '../models/code';
 .time-col {
   width: 80px;
 }
+.actions-col {
+  width: 40px;
+}
 md-list-item div {
   display: flex;
   align-items: center;
@@ -82,6 +93,9 @@ md-list-item div span {
   font-size: 18px;
   font-family: Roboto,"Helvetica Neue",sans-serif;
 }
+.actions-col i {
+  font-size: 20px;
+}
   `
 ]
 })
@@ -92,5 +106,9 @@ export class CodesComponent {
   constructor(private store: Store<fromRoot.State>) { 
     this.codes$ = this.store.select(fromRoot.getCodes);
     this.loading$ = this.store.select(fromRoot.getCodesLoading);
+  }
+
+  onDelete(c) {
+    this.store.dispatch(new code.DeleteAction(c));
   }
 }

@@ -22,6 +22,15 @@ export class CodeEffects {
         .takeUntil(nextSearch$)
         .map(codes => new code.LoadSuccessAction(codes))
         .catch(e => Observable.of(new code.LoadSuccessAction([])));
+    });
+
+  @Effect()
+  delete$: Observable<Action> = this.actions$
+    .ofType(code.DELETE)
+    .switchMap(a => {
+      return this.codeService.delete(a.payload)
+        .map(c => new code.DeleteSuccessAction(c))
+        .catch(e => Observable.empty());
     })
 
   constructor(private actions$: Actions, private codeService: CodeService) { }
