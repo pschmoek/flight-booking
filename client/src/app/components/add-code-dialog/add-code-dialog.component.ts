@@ -18,23 +18,23 @@ import { TransformTimeService } from '../../services/transform-time.service';
     <form [formGroup]="codeForm" novalidate>
       <div>
         <md-input-container style="width: 100%">
-          <input [required]="true" formControlName="code" mdInput type="text" placeholder="Code">
+          <input (keyup.enter)="onSave()" [required]="true" formControlName="code" mdInput type="text" placeholder="Code">
         </md-input-container>
       </div>
       <div>
         <md-input-container style="width: 100%">
-          <input [required]="true" formControlName="airline" mdInput type="text" placeholder="Airline">
+          <input (keyup.enter)="onSave()" [required]="true" formControlName="airline" mdInput type="text" placeholder="Airline">
         </md-input-container>
       </div>
       <div style="display: flex; justify-content: space-between; align-items: center;">
         <md-input-container style="width: 30%; margin:0; padding: 0;">
-          <input [required]="true" formControlName="from" mdInput type="text" placeholder="From">
+          <input (keyup.enter)="onSave()" [required]="true" formControlName="from" mdInput type="text" placeholder="From">
         </md-input-container>
         <md-input-container style="width: 30%; margin:0; padding: 0;">
-          <input [required]="true" formControlName="to" mdInput type="text" placeholder="To">
+          <input (keyup.enter)="onSave()" [required]="true" formControlName="to" mdInput type="text" placeholder="To">
         </md-input-container>
         <md-input-container style="width: 30%; margin:0; padding: 0;">
-          <input [required]="true" formControlName="time" mdInput type="text" placeholder="Time">
+          <input (keyup.enter)="onSave()" [required]="true" formControlName="time" mdInput type="text" placeholder="Time">
         </md-input-container>
       </div>
     </form>
