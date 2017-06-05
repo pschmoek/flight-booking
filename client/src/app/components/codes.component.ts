@@ -14,75 +14,43 @@ import { Code } from '../models/code';
     <md-progress-spinner mode="indeterminate">Loading Codes ...</md-progress-spinner>
     <span>Loading Codes ...</span>
   </div>
-  <md-list *ngIf="(codes$ | async)">
-    <md-list-item class="header-row">
-      <div class="actions-col">
-        <span>&nbsp;</span>
-      </div>
-      <div class="code-col">
-        <span>Code</span>
-      </div>
-      <div class="from-col">
-        <span>From</span>
-      </div>
-      <div class="to-col">
-        <span>To</span>
-      </div>
-      <div class="airline-col">
-        <span>Airline</span>
-      </div>
-      <div class="time-col">
-        <span>Departure</span>
-      </div>
-    </md-list-item>
-    <md-list-item style="height: 25px" *ngFor="let code of (codes$ | async)">
-      <div class="actions-col">
+  <md-grid-list *ngIf="(codes$ | async)" cols="6" rowHeight="40px">
+  
+    <md-grid-tile class="header"><div class="header"></div></md-grid-tile>
+    <md-grid-tile class="header"><div class="header">Code</div></md-grid-tile>
+    <md-grid-tile class="header"><div class="header">From</div></md-grid-tile>
+    <md-grid-tile class="header"><div class="header">To</div></md-grid-tile>
+    <md-grid-tile class="header"><div class="header">Airline</div></md-grid-tile>
+    <md-grid-tile class="header"><div class="header">Departure</div></md-grid-tile>
+
+    <ng-container *ngFor="let code of (codes$ | async)">
+      <md-grid-tile>
         <button md-icon-button (click)="onDelete(code)">
           <i class="material-icons">delete</i>
         </button>
-      </div>
-      <div class="code-col">
-        <span>{{ code.code }}</span>
-      </div>
-      <div class="from-col">
-        <span>{{ code.from }}</span>
-      </div>
-      <div class="to-col">
-        <span>{{ code.to }}</span>
-      </div>
-      <div class="airline-col">
-        <span>{{ code.airline }}</span>
-      </div>
-      <div class="time-col">
-        <span>{{ code.time | departureTime }}</span>
-      </div>
-    </md-list-item>
-  </md-list>
+      </md-grid-tile>
+      <md-grid-tile><div>{{code.code}}</div></md-grid-tile>
+      <md-grid-tile><div>{{code.from}}</div></md-grid-tile>
+      <md-grid-tile><div>{{code.to}}</div></md-grid-tile>
+      <md-grid-tile><div>{{code.airline}}</div></md-grid-tile>
+      <md-grid-tile><div>{{code.time | departureTime}}</div></md-grid-tile>
+    </ng-container>
+
+  </md-grid-list>
   `, styles: [`
-.code-col {
-  width: 120px;
+md-grid-tile {
+  font-size: 18px;
+  font-family: Roboto,"Helvetica Neue",sans-serif;
 }
-.from-col, .to-col {
-  width: 70px;
-}
-.airline-col {
-  width: 120px;
-}
-.time-col {
-  width: 80px;
-}
-.actions-col {
-  width: 40px;
-}
-md-list-item div {
-  display: flex;
-  align-items: center;
-}
-md-list-item div span {
-  margin-left: 5px;
-}
-.header-row {
+md-grid-tile.header {
   font-weight: bold;
+  height: 28px;
+}
+md-grid-tile div {
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  display: flex;  
 }
 .loading-box {
   display: flex;
@@ -92,9 +60,6 @@ md-list-item div span {
 .loading-box span {
   font-size: 18px;
   font-family: Roboto,"Helvetica Neue",sans-serif;
-}
-.actions-col i {
-  font-size: 20px;
 }
   `
 ]

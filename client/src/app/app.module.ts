@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-import { MdToolbarModule, MdButtonModule, MdListModule, MdProgressSpinnerModule } from '@angular/material';
+import { MdToolbarModule, MdButtonModule, MdListModule, MdProgressSpinnerModule, MdGridListModule } from '@angular/material';
 import { RouterModule } from '@angular/router';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
@@ -32,6 +32,7 @@ import { DepartureTimePipe } from './pipes/departure-time.pipe';
     MdButtonModule,
     MdListModule,
     MdProgressSpinnerModule,
+    MdGridListModule,
     RouterModule.forRoot(routes),
     StoreModule.provideStore(reducer),
     StoreDevtoolsModule.instrumentOnlyWithExtension(),
