@@ -11,7 +11,7 @@ import { HttpModule } from '@angular/http';
 import { routes } from './routes';
 import { AppComponent } from './app.component';
 import { CodesComponent } from './components/codes/codes.component';
-import { OverviewComponent } from './components/overview.component';
+import { OverviewComponent } from './components/overview/overview.component';
 import { reducer } from './reducers';
 import { CodeService } from './services/code.service';
 import { CodeEffects } from './effects/code';
