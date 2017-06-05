@@ -17,4 +17,8 @@ export class CodeService {
   delete(code: Code): Observable<Code> {
     return this.http.delete(`${this.baseUrl}/${code.id}`).map(r => r.json());
   }
+
+  save(code: Code): Observable<Code> {
+    return this.http.post(this.baseUrl, code).map(r => r.json());
+  }
 }

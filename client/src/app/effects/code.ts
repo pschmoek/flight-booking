@@ -32,7 +32,16 @@ export class CodeEffects {
       return this.codeService.delete(a.payload)
         .map(c => new code.DeleteSuccessAction(c))
         .catch(e => Observable.empty());
-    })
+    });
+
+  @Effect()
+  save$: Observable<Action> = this.actions$
+    .ofType(code.SAVE)
+    .switchMap(a => {
+      return this.codeService.save(a.payload)
+        .map(c => new code.SaveSuccessAction(c))
+        .catch(e => Observable.empty());        
+    });
 
   constructor(private actions$: Actions, private codeService: CodeService) { }
 }

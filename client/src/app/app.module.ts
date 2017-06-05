@@ -1,12 +1,19 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-import { MdToolbarModule, MdButtonModule, MdListModule, MdProgressSpinnerModule, MdGridListModule } from '@angular/material';
+import { MdToolbarModule,
+  MdButtonModule,
+  MdListModule,
+  MdProgressSpinnerModule,
+  MdGridListModule,
+  MdInputModule
+} from '@angular/material';
 import { RouterModule } from '@angular/router';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { HttpModule } from '@angular/http';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { routes } from './routes';
 import { AppComponent } from './app.component';
@@ -37,10 +44,12 @@ import { CodeGridComponent } from './components/codes/code-grid.component';
     MdListModule,
     MdProgressSpinnerModule,
     MdGridListModule,
+    MdInputModule,
     RouterModule.forRoot(routes),
     StoreModule.provideStore(reducer),
     StoreDevtoolsModule.instrumentOnlyWithExtension(),
-    EffectsModule.run(CodeEffects)
+    EffectsModule.run(CodeEffects),
+    ReactiveFormsModule
   ],
   providers: [CodeService],
   bootstrap: [AppComponent]

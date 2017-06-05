@@ -40,7 +40,15 @@ export function reducer(state = initialState, action: code.Actions): State {
         codes: newCodes,
         loaded: state.loaded,
         loading: state.loading
-      }
+      };
+    }
+
+    case code.SAVE_SUCCESS: {
+      return {
+        codes: [...state.codes, action.payload],
+        loaded: state.loaded,
+        loading: state.loading
+      };
     }
 
     default: {
