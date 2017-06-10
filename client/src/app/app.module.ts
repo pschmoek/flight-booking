@@ -8,7 +8,8 @@ import { MdToolbarModule,
   MdGridListModule,
   MdInputModule,
   MdDialogModule,
-  MdCardModule
+  MdCardModule,
+  MdIconModule
 } from '@angular/material';
 import { RouterModule } from '@angular/router';
 import { StoreModule } from '@ngrx/store';
@@ -71,6 +72,7 @@ import { PassengersTableComponent } from './components/booking/passengers-table.
     MdInputModule,
     MdDialogModule,
     MdCardModule,
+    MdIconModule,
     NgxDatatableModule,
     RouterModule.forRoot(routes),
     StoreModule.provideStore(reducer),
