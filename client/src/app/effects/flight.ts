@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Effect, Actions } from '@ngrx/effects';
 import { Action } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
+import { Router } from '@angular/router';
 
 import { FlightService } from '../services/flight.service';
 import * as flight from '../actions/flight';
@@ -21,5 +22,15 @@ export class FlightEffects {
         .catch(e => Observable.empty());
     });
 
-  constructor(private actions$: Actions, private flightService: FlightService) { }
+  @Effect()
+  navigation$ = this.actions$
+    .ofType(flight.DISPLAY_FLIGHT_DETAILS)
+    .switchMap(a => {
+      this.router.navigate(['booking', a.payload]);
+
+      return Observable.empty();
+    })
+
+  constructor(private actions$: Actions, private flightService: FlightService,
+    private router: Router) { }
 }

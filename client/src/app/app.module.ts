@@ -34,6 +34,7 @@ import { FlightEffects } from './effects/flight';
 import { FlightTableComponent } from './components/flights/flight-table.component';
 import { SearchFlightsFormComponent } from './components/flights/search-flights-form.component';
 import { FlightService } from './services/flight.service';
+import { BookingComponent } from './components/booking/booking.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { FlightService } from './services/flight.service';
     AddCodeDialogComponent,
     FlightsComponent,
     FlightTableComponent,
-    SearchFlightsFormComponent
+    SearchFlightsFormComponent,
+    BookingComponent
   ],
   imports: [
     BrowserModule,
