@@ -12,7 +12,7 @@ import { Flight } from '../../models/flight';
   template: `
   <app-spinner *ngIf="isLoading$ | async" text="Loading Flight..."></app-spinner>
   <app-flight-overview *ngIf="flight$ | async" [flight]="flight$ | async"></app-flight-overview>
-  <app-passengers-table></app-passengers-table>
+  <app-passengers-table *ngIf="flight$ | async" [bookings]="(flight$ | async).bookings"></app-passengers-table>
   `
 })
 export class BookingComponent implements OnInit {

@@ -1,6 +1,7 @@
 const bookings = require('./default-bookings');
 const uuid = require('uuid/v4');
 const flight = require('./flight');
+const moment = require('moment');
 
 module.exports = {
   async getBookings(flightId) {
@@ -17,7 +18,8 @@ module.exports = {
       id: uuid(),
       firstName: booking.firstName,
       lastName: booking.lastName,
-      flightId: booking.flightId
+      flightId: booking.flightId,
+      timestamp: moment().utc().format()
     };
 
     bookings.push(newBooking);
