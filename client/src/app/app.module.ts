@@ -35,6 +35,7 @@ import { FlightTableComponent } from './components/flights/flight-table.componen
 import { SearchFlightsFormComponent } from './components/flights/search-flights-form.component';
 import { FlightService } from './services/flight.service';
 import { BookingComponent } from './components/booking/booking.component';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 @NgModule({
   declarations: [
@@ -62,6 +63,7 @@ import { BookingComponent } from './components/booking/booking.component';
     MdGridListModule,
     MdInputModule,
     MdDialogModule,
+    NgxDatatableModule,
     RouterModule.forRoot(routes),
     StoreModule.provideStore(reducer),
     StoreDevtoolsModule.instrumentOnlyWithExtension(),

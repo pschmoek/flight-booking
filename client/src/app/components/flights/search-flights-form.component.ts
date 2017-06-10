@@ -25,13 +25,17 @@ import { FlightSearchParams } from '../../models/flight-search-params';
     </div>
   </form>
   `, styles: [`
+  form {
+    margin-top: 10px;
+  }
+
   div {
     display: flex;
     justify-content: center;
   }
   md-input-container {
-    margin: 10px;
-    width: 40%;
+    width: 45%;
+    margin: 0 10px;
   }
   `]
 })
