@@ -29,7 +29,7 @@ module.exports = {
   async getFlights(from, to, date) {
     const matchingCodes = await codes.filter(from, to);
     if (!matchingCodes || matchingCodes.length === 0) {
-      throw `Es existiert keine Verbindung von ${from || '*'} nach ${to || '*'}.`;
+      return [];
     }
 
     const result = [];

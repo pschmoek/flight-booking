@@ -35,7 +35,7 @@ export function reducer(state = initialState, action: code.Actions): State {
       const newCodes = [...state.codes];
       const deletedElement = newCodes.find(e => e.id === action.payload.id);
       newCodes.splice(newCodes.indexOf(deletedElement), 1);
-      
+
       return {
         codes: newCodes,
         loaded: state.loaded,
@@ -43,7 +43,7 @@ export function reducer(state = initialState, action: code.Actions): State {
       };
     }
 
-    case code.SAVE_SUCCESS: {
+    case code.SAVE_NEW_CODE_SUCCESS: {
       return {
         codes: [...state.codes, action.payload],
         loaded: state.loaded,

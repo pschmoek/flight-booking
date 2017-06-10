@@ -39,10 +39,10 @@ export class CodeEffects {
 
   @Effect()
   save$: Observable<Action> = this.actions$
-    .ofType(code.SAVE)
+    .ofType(code.SAVE_NEW_CODE)
     .switchMap(a => {
       return this.codeService.save(a.payload)
-        .mergeMap(c => Observable.from([new code.SaveSuccessAction(c),
+        .mergeMap(c => Observable.from([new code.SaveNewCodeSuccessAction(c),
           new codeDialog.CloseDialogAction()])
         ).catch(e => Observable.empty());
     });

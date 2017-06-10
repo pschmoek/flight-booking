@@ -12,7 +12,7 @@ import { TransformTimeService } from '../../services/transform-time.service';
 @Component({
   selector: 'app-add-code-dialog',
   template: `
-<div style="width: 400px">
+<div style="width: 400px" (keyup.esc)="onDiscard()">
   <h2 md-dialog-title style="font-family: Roboto,'Helvetica Neue',sans-serif;">Create Flight Code</h2>
   <md-dialog-content>
     <form [formGroup]="codeForm" novalidate>
@@ -75,7 +75,7 @@ export class AddCodeDialogComponent implements OnInit {
     if (this.codeForm.valid) {
       const newCode = Object.assign(this.codeForm.value);
       newCode.time = this.transformTimeService.toUtcTime(newCode.time);
-      this.store.dispatch(new code.SaveAction(newCode));
+      this.store.dispatch(new code.SaveNewCodeAction(newCode));
     }
   }
 }

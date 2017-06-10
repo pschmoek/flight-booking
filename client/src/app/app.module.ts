@@ -24,12 +24,16 @@ import { reducer } from './reducers';
 import { CodeService } from './services/code.service';
 import { CodeEffects } from './effects/code';
 import { DepartureTimePipe } from './pipes/departure-time.pipe';
-import { SpinnerComponent } from './components/codes/spinner.component';
+import { SpinnerComponent } from './components/shared/spinner.component';
 import { CodeGridComponent } from './components/codes/code-grid.component';
 import { AddCodeDialogComponent } from './components/add-code-dialog/add-code-dialog.component';
 import { CodeDialogEffects } from './effects/code-dialog';
 import { TransformTimeService } from './services/transform-time.service';
 import { FlightsComponent } from './components/flights/flights.component';
+import { FlightEffects } from './effects/flight';
+import { FlightTableComponent } from './components/flights/flight-table.component';
+import { SearchFlightsFormComponent } from './components/flights/search-flights-form.component';
+import { FlightService } from './services/flight.service';
 
 @NgModule({
   declarations: [
@@ -40,7 +44,9 @@ import { FlightsComponent } from './components/flights/flights.component';
     SpinnerComponent,
     CodeGridComponent,
     AddCodeDialogComponent,
-    FlightsComponent
+    FlightsComponent,
+    FlightTableComponent,
+    SearchFlightsFormComponent
   ],
   imports: [
     BrowserModule,
@@ -58,9 +64,10 @@ import { FlightsComponent } from './components/flights/flights.component';
     StoreModule.provideStore(reducer),
     StoreDevtoolsModule.instrumentOnlyWithExtension(),
     EffectsModule.run(CodeEffects),
-    EffectsModule.run(CodeDialogEffects)
+    EffectsModule.run(CodeDialogEffects),
+    EffectsModule.run(FlightEffects)
   ],
-  providers: [CodeService, TransformTimeService],
+  providers: [CodeService, TransformTimeService, FlightService],
   entryComponents: [
     AddCodeDialogComponent
   ],
