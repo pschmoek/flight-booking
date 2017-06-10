@@ -6,6 +6,7 @@ import { FlightSearchParams } from '../../models/flight-search-params';
 @Component({
   selector: 'app-search-flights-form',
   template: `
+<md-card style="margin-top: 10px">
   <form [formGroup]="form" novalidate (keyup.enter)="onEnter()">
     <div>
       <md-input-container>
@@ -24,6 +25,7 @@ import { FlightSearchParams } from '../../models/flight-search-params';
       </md-input-container>
     </div>
   </form>
+</md-card>
   `, styles: [`
   form {
     margin-top: 10px;
@@ -34,7 +36,7 @@ import { FlightSearchParams } from '../../models/flight-search-params';
     justify-content: center;
   }
   md-input-container {
-    width: 45%;
+    width: 50%;
     margin: 0 10px;
   }
   `]

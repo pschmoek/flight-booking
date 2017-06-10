@@ -5,7 +5,7 @@ import { Booking } from '../../models/booking';
 @Component({
   selector: 'app-passengers-table',
   template: `
-<ngx-datatable class="material striped"
+<ngx-datatable class="material"
   style="margin-top: 10px"
   [rows]="bookings"
   [columnMode]="'force'"

@@ -5,7 +5,7 @@ import { Flight } from '../../models/flight';
 @Component({
   selector: 'app-flight-table',
   template: `
-<ngx-datatable class="material"
+<ngx-datatable class="material" style="margin-top: 10px"
   [rows]="flights"
   [columnMode]="'force'"
   [headerHeight]="50"
