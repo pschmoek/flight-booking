@@ -12,9 +12,9 @@ import { Flight } from '../../models/flight';
   [footerHeight]="50"
   [rowHeight]="50"
   (activate)="onActivate($event)">
-  <ngx-datatable-column prop="code"></ngx-datatable-column>
-  <ngx-datatable-column prop="from"></ngx-datatable-column>
-  <ngx-datatable-column prop="to"></ngx-datatable-column>
+  <ngx-datatable-column [width]="60" prop="code"></ngx-datatable-column>
+  <ngx-datatable-column [width]="40" prop="from"></ngx-datatable-column>
+  <ngx-datatable-column [width]="40" prop="to"></ngx-datatable-column>
   <ngx-datatable-column prop="departure">
     <ng-template let-value="value" ngx-datatable-cell-template>
       {{value | date:'dd.MM.yyyy HH:mm'}}
