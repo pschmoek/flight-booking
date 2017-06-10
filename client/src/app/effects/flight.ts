@@ -11,7 +11,7 @@ import * as flight from '../actions/flight';
 export class FlightEffects {
 
   @Effect()
-  search$ = this.actions$
+  search$: Observable<Action> = this.actions$
     .ofType(flight.SEARCH_FLIGHTS)
     .switchMap(a => {
       const nextSearch$ = this.actions$.ofType(flight.SEARCH_FLIGHTS).skip(1);
@@ -23,10 +23,10 @@ export class FlightEffects {
     });
 
   @Effect()
-  navigation$ = this.actions$
+  navigation$: Observable<Action> = this.actions$
     .ofType(flight.DISPLAY_FLIGHT_DETAILS)
     .switchMap(a => {
-      this.router.navigate(['booking', a.payload]);
+      this.router.navigate(['bookings', a.payload]);
 
       return Observable.empty();
     })

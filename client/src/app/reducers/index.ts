@@ -6,17 +6,20 @@ import { createSelector } from 'reselect';
 import * as fromCode from './code';
 import * as fromCodeDialog from './code-dialog';
 import * as fromFlight from './flight';
+import * as fromBooking from './booking';
 
 export interface State {
   code: fromCode.State;
   codeDialog: fromCodeDialog.State;
   flight: fromFlight.State;
+  booking: fromBooking.State;
 }
 
 const reducers = {
   code: fromCode.reducer,
   codeDialog: fromCodeDialog.reducer,
-  flight: fromFlight.reducer
+  flight: fromFlight.reducer,
+  booking: fromBooking.reducer
 };
 
 const combinedReducers: ActionReducer<State> = combineReducers(reducers);
@@ -37,3 +40,9 @@ export const getFlightState = (state: State) => state.flight;
 export const getFlights = createSelector(getFlightState, fromFlight.getFlights);
 export const getIsLoadingFlights = createSelector(getFlightState, fromFlight.getIsLoading);
 export const getCurrentFlightSearchParams = createSelector(getFlightState, fromFlight.getCurrentParams);
+
+export const getBookingState = (state: State) => state.booking;
+export const getBookingFlight = createSelector(getBookingState, fromBooking.getFlight);
+export const getBookingErrorMessage = createSelector(getBookingState, fromBooking.getErrorMessage);
+export const getBookingIsLoading = createSelector(getBookingState, fromBooking.getIsLoading);
+export const getBookingIsSaving = createSelector(getBookingState, fromBooking.getIsSaving);

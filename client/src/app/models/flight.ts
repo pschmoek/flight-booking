@@ -1,3 +1,5 @@
+import { Booking } from './booking';
+
 export interface Flight {
   id?: string;
   code: string;
@@ -6,4 +8,5 @@ export interface Flight {
   departure: string;
   airline: string;
   aircraft: string;
+  bookings?: Booking[];
 }

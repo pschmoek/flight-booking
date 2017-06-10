@@ -7,7 +7,8 @@ import { MdToolbarModule,
   MdProgressSpinnerModule,
   MdGridListModule,
   MdInputModule,
-  MdDialogModule
+  MdDialogModule,
+  MdCardModule
 } from '@angular/material';
 import { RouterModule } from '@angular/router';
 import { StoreModule } from '@ngrx/store';
@@ -15,6 +16,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { HttpModule } from '@angular/http';
 import { ReactiveFormsModule } from '@angular/forms';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 import { routes } from './routes';
 import { AppComponent } from './app.component';
@@ -35,7 +37,10 @@ import { FlightTableComponent } from './components/flights/flight-table.componen
 import { SearchFlightsFormComponent } from './components/flights/search-flights-form.component';
 import { FlightService } from './services/flight.service';
 import { BookingComponent } from './components/booking/booking.component';
-import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { BookingService } from './services/booking.service';
+import { BookingEffects } from './effects/booking';
+import { FlightOverviewComponent } from './components/booking/flight-overview.component';
+import { PassengersTableComponent } from './components/booking/passengers-table.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +54,9 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
     FlightsComponent,
     FlightTableComponent,
     SearchFlightsFormComponent,
-    BookingComponent
+    BookingComponent,
+    FlightOverviewComponent,
+    PassengersTableComponent
   ],
   imports: [
     BrowserModule,
@@ -63,15 +70,22 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
     MdGridListModule,
     MdInputModule,
     MdDialogModule,
+    MdCardModule,
     NgxDatatableModule,
     RouterModule.forRoot(routes),
     StoreModule.provideStore(reducer),
     StoreDevtoolsModule.instrumentOnlyWithExtension(),
     EffectsModule.run(CodeEffects),
     EffectsModule.run(CodeDialogEffects),
-    EffectsModule.run(FlightEffects)
+    EffectsModule.run(FlightEffects),
+    EffectsModule.run(BookingEffects)
   ],
-  providers: [CodeService, TransformTimeService, FlightService],
+  providers: [
+    CodeService,
+    TransformTimeService,
+    FlightService,
+    BookingService
+  ],
   entryComponents: [
     AddCodeDialogComponent
   ],

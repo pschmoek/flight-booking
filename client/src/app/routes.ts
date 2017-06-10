@@ -24,7 +24,7 @@ export const routes: Routes = [
     component: FlightsComponent
   },
   {
-    path: 'booking/:flight',
+    path: 'bookings/:flight',
     component: BookingComponent
   }
 ];
