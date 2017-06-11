@@ -1,25 +1,16 @@
 const express = require('express');
 const router = express.Router();
-const backend = require('../services/code');
-
-router.get('/:id', async (req, res) => {
-  try {
-    const code = await backend.findCodeById(req.params.id);
-    res.json(code);
-  } catch (e) {
-    res.status(404).json(e);
-  }
-});
+const codeService = require('../services/code');
 
 router.get('/', async (req, res) => {
-  const codes = await backend.getCodes();
+  const codes = await codeService.getAll();
   res.json(codes);
 });
 
 router.post('/', async (req, res) => {
   try {
-    const code = await backend.addCode(req.body);
-    res.json(code);
+    const code = await codeService.addCode(req.body);
+    res.status(201).json(code);
   } catch (e) {
     res.status(400).json(e);
   }
@@ -27,7 +18,7 @@ router.post('/', async (req, res) => {
 
 router.delete('/:id', async (req,res) => {
   try {
-    const code = await backend.delete(req.params.id);
+    const code = await codeService.delete(req.params.id);
     res.json(code);
   } catch (e) {
     res.status(400).json(e);

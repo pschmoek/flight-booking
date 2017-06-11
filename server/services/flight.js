@@ -1,8 +1,6 @@
-const moment = require('moment');
 const uuid = require('uuid/v4');
-const flights = require('./default-flights');
-const codes = require('./code');
-const booking = require('./booking');
+const moment = require('moment');
+const backend = require('./backend');
 
 const map = (flight, code, bookings) => {
   return Object.assign({}, {
@@ -18,65 +16,56 @@ const map = (flight, code, bookings) => {
 }
 
 module.exports = {
-  async findFlight(id) {
-    const flight = flights.find(f => f.id === id);
+
+  async getFlight(id) {
+    const flight = backend.flights.find(f => f.id === id);
     if (!flight) {
-      throw 'Der Flug existiert nicht.';
+      throw 'Flight does not exist.';
     }
 
-    const code = await codes.findCode(flight.code);
-    const bookings = await booking.getBookings(flight.id);
+    const code = backend.codes.find(c => c.id === flight.codeId);
+    const bookings = backend.bookings.filter(b => b.flightId === flight.id);
 
     return map(flight, code, bookings);
   },
 
-  async getFlights(from, to, date) {
-    const matchingCodes = await codes.filter(from, to);
-    if (!matchingCodes || matchingCodes.length === 0) {
-      return [];
-    }
+  async filterFlights(from, to, date, code) {
+    const flightsWithCode = backend.flights
+      .filter(f => (!date || f.date === date))
+      .map(f => {
+        const code = backend.codes.find(c => c.id === f.codeId);
+        const bookings = backend.bookings.filter(b => b.flightId === f.id);
 
-    const result = [];
-    for (const code of matchingCodes) {
-      let matches = flights.filter(f => (!date || f.date === date) && f.code === code.code);
-      for (const match of matches) {
-        result.push(map(match, code));
-      }
-    }
-
-    return result;
+        return map(f, code, bookings);
+      });
+    
+    return flightsWithCode
+      .filter(f => (!from || f.from === from)
+        && (!to || f.to === to)
+        && (!code || f.code === code));
   },
 
   async addFlight(flight) {
-    if (!flight.code) {
-      throw 'Flug kann nicht angelegt werden. Es wurde kein Flug Code geliefert.';
-    }
-    
-    const code = await codes.findCode(flight.code);
-
+    const code = backend.codes.find(c => c.id === flight.codeId);
     if (!code) {
-      throw `Flug kann nicht angelegt werden. Der Code ${flight.code} existiert nicht.`;
+      throw `Flight cannot be created. Code does not exist.`;
     }
 
-    const alreadyExistingFlight = flights.find(f => f.code === flight.code && f.date === flight.date);
-
+    const alreadyExistingFlight = backend.flights
+      .find(f => f.codeId === flight.codeId && f.date === flight.date);
     if (alreadyExistingFlight) {
-      throw { message: 'Der Flug existiert bereits.', flight: alreadyExistingFlight };
+      throw 'Flight already present on date.';
     }
 
     const newFlight = {
       id: uuid(),
-      code: code.code,
+      codeId: code.id,
       date: flight.date,
       aircraft: flight.aircraft
     };
 
-    flights.push(newFlight);
+    backend.flights.push(newFlight);
     
-    return map(newFlight, code);
-  },
-
-  async findFlightByCode(code, date) {
-    return flights.find(f => f.code === code && f.date === date);
+    return map(newFlight, code, []);
   }
 }

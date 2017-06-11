@@ -1,31 +1,16 @@
-const codes = require('./default-codes');
 const uuid = require('uuid/v4');
+const backend = require('./backend');
 
 module.exports = {
-  async findCode(code) {
-    return codes.find(c => c.code === code);
-  },
-  
-  async findCodeById(id) {
-    return codes.find(c => c.id === id);
-  },
 
-  async getCodes() {
-    return codes;
-  },
-
-  async filter(from, to) {
-    return codes.filter(c => (!from || c.from === from) 
-      && (!to || c.to === to));
+  async getAll() {
+    return backend.codes;
   },
 
   async addCode(code) {
-    const alreadyExistingCode = codes.find(c => c.code === code.code);
-    if (alreadyExistingCode) {
-      throw {
-        message: 'Der Code existiert bereits.',
-        code: alreadyExistingCode
-      }
+    const codeAlreadyPresent = backend.codes.find(c => c.code === code.code);
+    if (codeAlreadyPresent) {
+      throw 'Code already exists.';
     }
 
     const newCode = {
@@ -37,18 +22,23 @@ module.exports = {
       time: code.time
     };
 
-    codes.push(newCode);
+    backend.codes.push(newCode);
 
     return newCode;
   },
 
   async delete(id) {
-    const codeToDelete = codes.find(c => c.id === id);
+    const codeToDelete = backend.codes.find(c => c.id === id);
     if (!codeToDelete) {
-      throw 'Code existiert nicht.';
+      throw 'Code does not exist.';
     }
 
-    codes.splice(codes.indexOf(codeToDelete), 1);
+    const flights = backend.flights.filter(f => f.codeId === codeToDelete.id);
+    if (flights && flights.length > 0) {
+      throw 'Code cannot be deleted. One or more flights present.';
+    }
+
+    backend.codes.splice(backend.codes.indexOf(codeToDelete), 1);
 
     return codeToDelete;
   }

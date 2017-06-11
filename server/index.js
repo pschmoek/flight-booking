@@ -5,11 +5,13 @@ const bodyParser = require('body-parser');
 
 const flightRoutes = require('./routes/flights');
 const codeRoutes = require('./routes/codes');
+const bookingRoutes = require('./routes/bookings');
 
 app.use(bodyParser.json({ type: 'application/json' }))
 
 app.use('/api/flights', flightRoutes);
 app.use('/api/codes', codeRoutes);
+app.use('/api/bookings', bookingRoutes);
 
 io.on('connection', function(socket){
   console.log('a user connected');

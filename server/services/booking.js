@@ -1,15 +1,11 @@
-const bookings = require('./default-bookings');
 const uuid = require('uuid/v4');
-const flight = require('./flight');
 const moment = require('moment');
+const backend = require('./backend');
 
 module.exports = {
-  async getBookings(flightId) {
-    return bookings.filter(b => b.flightId === flightId);
-  },
 
   async addBooking(booking) {
-    const flight = flight.findFlight(booking.flightId);
+    const flight = backend.flights.find(f => f.id === booking.flightId);
     if (!flight) {
       throw 'Flight does not exist.';
     }
@@ -22,7 +18,7 @@ module.exports = {
       timestamp: moment().utc().format()
     };
 
-    bookings.push(newBooking);
+    backend.bookings.push(newBooking);
 
     return newBooking;
   }
