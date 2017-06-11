@@ -77,6 +77,7 @@ export function reducer(state = initialState, action: booking.Actions): State {
 }
 
 export const getFlight = (state: State) => state.flight;
+export const getFlightsBookings = (state: State) => state.flight ? state.flight.bookings : null;
 export const getIsLoading = (state: State) => state.isLoading;
 export const getErrorMessage = (state: State) => state.errorMessage;
 export const getIsSaving = (state: State) => state.isSaving;

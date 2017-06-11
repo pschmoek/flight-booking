@@ -46,6 +46,7 @@ export const getCurrentFlightSearchParams = createSelector(getFlightState, fromF
 
 export const getBookingState = (state: State) => state.booking;
 export const getBookingFlight = createSelector(getBookingState, fromBooking.getFlight);
+export const getBookings = createSelector(getBookingState, fromBooking.getFlightsBookings);
 export const getBookingErrorMessage = createSelector(getBookingState, fromBooking.getErrorMessage);
 export const getBookingIsLoading = createSelector(getBookingState, fromBooking.getIsLoading);
 export const getBookingIsSaving = createSelector(getBookingState, fromBooking.getIsSaving);
