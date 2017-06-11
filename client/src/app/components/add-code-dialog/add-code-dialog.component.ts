@@ -5,6 +5,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import * as fromRoot from '../../reducers';
 import * as code from '../../actions/code';
+import * as message from '../../actions/message';
 import { Code } from '../../models/code';
 import { TransformTimeService } from '../../services/transform-time.service';
 
@@ -75,6 +76,8 @@ export class AddCodeDialogComponent implements OnInit {
       const newCode = Object.assign(this.codeForm.value);
       newCode.time = this.transformTimeService.toUtcTime(newCode.time);
       this.store.dispatch(new code.SaveNewCodeAction(newCode));
+    } else {
+      this.store.dispatch(new message.ShowMessageAction('Please enter valid information.'));
     }
   }
 }

@@ -17,7 +17,7 @@ export class MessageEffects {
 
       return Observable.of(new message.HideMessageAction())
           .takeUntil(nextMessage$)
-          .delay(5000);
+          .delay(3000);
     });
 
   constructor(private actions$: Actions) { }
