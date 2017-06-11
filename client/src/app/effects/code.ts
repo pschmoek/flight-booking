@@ -9,7 +9,6 @@ import 'rxjs/add/observable/empty';
 import 'rxjs/add/observable/from';
 
 import * as code from '../actions/code';
-import * as dialogActions from '../actions/dialog';
 import * as message from '../actions/message';
 import { CodeService } from '../services/code.service'
 
@@ -45,9 +44,8 @@ export class CodeEffects {
     .ofType(code.SAVE_NEW_CODE)
     .switchMap(a => {
       return this.codeService.save(a.payload)
-        .mergeMap(c => Observable.from([new code.SaveNewCodeSuccessAction(c),
-          new dialogActions.CloseDialogAction()])
-        ).catch(e => Observable.empty());
+        .map(c => new code.SaveNewCodeSuccessAction(c))
+        .catch(e => Observable.empty());
     });
 
   constructor(private actions$: Actions, private codeService: CodeService) { }

@@ -29,7 +29,6 @@ import { DepartureTimePipe } from './pipes/departure-time.pipe';
 import { SpinnerComponent } from './components/shared/spinner.component';
 import { CodeGridComponent } from './components/codes/code-grid.component';
 import { AddCodeDialogComponent } from './components/add-code-dialog/add-code-dialog.component';
-import { DialogEffects } from './effects/dialog';
 import { TransformTimeService } from './services/transform-time.service';
 import { FlightsComponent } from './components/flights/flights.component';
 import { FlightEffects } from './effects/flight';
@@ -79,7 +78,6 @@ import { MessageEffects } from './effects/message';
     StoreModule.provideStore(reducer),
     StoreDevtoolsModule.instrumentOnlyWithExtension(),
     EffectsModule.run(CodeEffects),
-    EffectsModule.run(DialogEffects),
     EffectsModule.run(FlightEffects),
     EffectsModule.run(BookingEffects),
     EffectsModule.run(MessageEffects)

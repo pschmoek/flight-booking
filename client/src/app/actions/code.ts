@@ -8,6 +8,8 @@ export const DELETE =                 '[Code] Delete';
 export const DELETE_SUCCESS =         '[Code] Delete Success'
 export const SAVE_NEW_CODE =          '[Code] Save New Code';
 export const SAVE_NEW_CODE_SUCCESS =  '[Code] Save New Code Success';
+export const OPEN_MODAL =             '[Code] Open Modal';
+export const CLOSE_MODAL =            '[Code] Close Modal';
 
 export class LoadAction implements Action {
   readonly type = LOAD;
@@ -43,10 +45,20 @@ export class SaveNewCodeSuccessAction implements Action {
   constructor(public payload: Code) { }
 }
 
+export class OpenModalAction implements Action {
+  readonly type = OPEN_MODAL;
+}
+
+export class CloseModalAction implements Action {
+  readonly type = CLOSE_MODAL;
+}
+
 export type Actions
   = LoadAction
   | LoadSuccessAction
   | DeleteAction
   | DeleteSuccessAction
   | SaveNewCodeAction
-  | SaveNewCodeSuccessAction;
+  | SaveNewCodeSuccessAction
+  | OpenModalAction
+  | CloseModalAction;

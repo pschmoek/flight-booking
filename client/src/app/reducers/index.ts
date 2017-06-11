@@ -31,6 +31,7 @@ export function reducer(state: any, action: any) {
 export const getCodeState = (state: State) => state.code;
 export const getCodes = createSelector(getCodeState, fromCode.getCodes);
 export const getCodesLoading = createSelector(getCodeState, fromCode.getCodesLoading);
+export const getCodesModalOpen = createSelector(getCodeState, fromCode.getCodeModalOpen);
 
 export const getFlightState = (state: State) => state.flight;
 export const getFlights = createSelector(getFlightState, fromFlight.getFlights);
@@ -42,5 +43,6 @@ export const getBookingFlight = createSelector(getBookingState, fromBooking.getF
 export const getBookingFlightCode = createSelector(getBookingState, fromBooking.getFlightsCode);
 export const getBookings = createSelector(getBookingState, fromBooking.getFlightsBookings);
 export const getBookingIsLoading = createSelector(getBookingState, fromBooking.getIsLoading);
+export const getBookingIsModalOpen = createSelector(getBookingState, fromBooking.getIsModalOpen);
 
 export const getMessageState = (state: State) => state.message;

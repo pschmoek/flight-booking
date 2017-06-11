@@ -6,7 +6,6 @@ import { Observable } from 'rxjs/Observable';
 import { MdSnackBar } from '@angular/material';
 
 import * as fromRoot from '../../reducers';
-import * as dialog from '../../actions/dialog';
 import * as message from '../../actions/message';
 import * as booking from '../../actions/booking';
 import { Flight } from '../../models/flight';
@@ -56,7 +55,7 @@ export class AddBookingDialogComponent implements OnInit {
   }
 
   onDiscard() {
-    this.store.dispatch(new dialog.CloseDialogAction());
+    this.store.dispatch(new booking.CloseModalAction());
   }
 
   onSave() {

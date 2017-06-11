@@ -4,7 +4,6 @@ import { Store } from '@ngrx/store';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import * as fromRoot from '../../reducers';
-import * as dialogActions from '../../actions/dialog';
 import * as code from '../../actions/code';
 import { Code } from '../../models/code';
 import { TransformTimeService } from '../../services/transform-time.service';
@@ -64,7 +63,7 @@ export class AddCodeDialogComponent implements OnInit {
   }
 
   onDiscard() {
-    this.store.dispatch(new dialogActions.CloseDialogAction());
+    this.store.dispatch(new code.CloseModalAction());
   }
 
   onSave() {

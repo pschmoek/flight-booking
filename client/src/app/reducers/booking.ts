@@ -5,11 +5,13 @@ import { Booking } from '../models/booking';
 export interface State {
   isLoading: boolean;
   flight: Flight;
+  isModalOpen: boolean;
 }
 
 export const initialState: State = {
   flight: null,
   isLoading: false,
+  isModalOpen: false
 }
 
 export function reducer(state = initialState, action: booking.Actions): State {
@@ -18,6 +20,7 @@ export function reducer(state = initialState, action: booking.Actions): State {
       return {
         flight: null,
         isLoading: true,
+        isModalOpen: false
       }
     }
 
@@ -25,34 +28,46 @@ export function reducer(state = initialState, action: booking.Actions): State {
       return {
         flight: action.payload,
         isLoading: false,
-      }
-    }
-
-    case booking.ADD_BOOKING_TO_FLIGHT: {
-      return {
-        flight: state.flight,
-        isLoading: false,
+        isModalOpen: false
       }
     }
 
     case booking.ADD_BOOKING_TO_FLIGHT_SUCCESS: {
-      if (!state.flight.bookings) {
-        state.flight.bookings = [];
+      const flight = Object.assign(state.flight);
+      if (!flight.bookings) {
+        flight.bookings = [];
       }
 
-      state.flight.bookings.push(action.payload)
+      flight.bookings = [...flight.bookings, action.payload];
 
       return {
-        flight: state.flight,
+        flight: flight,
         isLoading: false,
+        isModalOpen: false
       }
     }
 
-    case booking.ADD_BOOKING_TO_FLIGHT_FAILURE:
     case booking.LOAD_FLIGHT_FAILURE: {
       return {
         flight: null,
         isLoading: false,
+        isModalOpen: state.isModalOpen
+      }
+    }
+
+    case booking.OPEN_MODAL: {
+      return {
+        flight: state.flight,
+        isLoading: state.isLoading,
+        isModalOpen: true
+      }
+    }
+
+    case booking.CLOSE_MODAL: {
+      return {
+        flight: state.flight,
+        isLoading: state.isLoading,
+        isModalOpen: false
       }
     }
 
@@ -66,3 +81,4 @@ export const getFlight = (state: State) => state.flight;
 export const getFlightsBookings = (state: State) => state.flight ? state.flight.bookings : null;
 export const getFlightsCode = (state: State) => state.flight ? state.flight.code : null;
 export const getIsLoading = (state: State) => state.isLoading;
+export const getIsModalOpen = (state: State) => state.isModalOpen;
