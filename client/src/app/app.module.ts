@@ -29,7 +29,7 @@ import { DepartureTimePipe } from './pipes/departure-time.pipe';
 import { SpinnerComponent } from './components/shared/spinner.component';
 import { CodeGridComponent } from './components/codes/code-grid.component';
 import { AddCodeDialogComponent } from './components/add-code-dialog/add-code-dialog.component';
-import { CodeDialogEffects } from './effects/code-dialog';
+import { DialogEffects } from './effects/dialog';
 import { TransformTimeService } from './services/transform-time.service';
 import { FlightsComponent } from './components/flights/flights.component';
 import { FlightEffects } from './effects/flight';
@@ -41,6 +41,7 @@ import { BookingService } from './services/booking.service';
 import { BookingEffects } from './effects/booking';
 import { FlightOverviewComponent } from './components/booking/flight-overview.component';
 import { PassengersTableComponent } from './components/booking/passengers-table.component';
+import { AddBookingDialogComponent } from './components/add-booking-dialog/add-booking-dialog.component';
 import { MessageEffects } from './effects/message';
 
 @NgModule({
@@ -57,7 +58,8 @@ import { MessageEffects } from './effects/message';
     SearchFlightsFormComponent,
     BookingComponent,
     FlightOverviewComponent,
-    PassengersTableComponent
+    PassengersTableComponent,
+    AddBookingDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -77,7 +79,7 @@ import { MessageEffects } from './effects/message';
     StoreModule.provideStore(reducer),
     StoreDevtoolsModule.instrumentOnlyWithExtension(),
     EffectsModule.run(CodeEffects),
-    EffectsModule.run(CodeDialogEffects),
+    EffectsModule.run(DialogEffects),
     EffectsModule.run(FlightEffects),
     EffectsModule.run(BookingEffects),
     EffectsModule.run(MessageEffects)
@@ -89,7 +91,8 @@ import { MessageEffects } from './effects/message';
     BookingService
   ],
   entryComponents: [
-    AddCodeDialogComponent
+    AddCodeDialogComponent,
+    AddBookingDialogComponent
   ],
   bootstrap: [AppComponent]
 })

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { MdSnackBar } from '@angular/material';
 
 import * as code from './actions/code';
 import * as fromRoot from './reducers';
@@ -15,4 +16,14 @@ import * as fromRoot from './reducers';
 <router-outlet></router-outlet>
   `
 })
-export class AppComponent { }
+export class AppComponent {
+  constructor(private store: Store<fromRoot.State>, private snackBar: MdSnackBar) {
+    this.store.select(fromRoot.getMessageState).subscribe(s => {
+      if (s.isVisible) {
+        this.snackBar.open(s.message);
+      } else {
+        this.snackBar.dismiss();
+      }
+    });
+  }
+}

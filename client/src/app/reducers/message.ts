@@ -1,28 +1,28 @@
 import * as message from '../actions/message';
 
 export interface State {
+  isVisible: boolean;
   message: string;
-  isOpen: boolean;
 }
 
 export const initialState: State = {
-  isOpen: false,
+  isVisible: false,
   message: null
-};
+}
 
 export function reducer(state = initialState, action: message.Actions): State {
   switch (action.type) {
-    case message.HIDE_MESSAGE_SUCCESS: {
+    case message.SHOW_MESSAGE: {
       return {
-        isOpen: false,
-        message: null
+        isVisible: true,
+        message: action.payload
       }
     }
 
-    case message.SHOW_MESSAGE_SUCCESS: {
+    case message.HIDE_MESSAGE: {
       return {
-        isOpen: true,
-        message: action.payload
+        isVisible: false,
+        message: null
       }
     }
 
@@ -31,6 +31,3 @@ export function reducer(state = initialState, action: message.Actions): State {
     }
   }
 }
-
-export const getIsOpen = (state: State) => state.isOpen;
-export const getMessage = (state: State) => state.message;

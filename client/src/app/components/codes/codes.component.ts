@@ -5,8 +5,9 @@ import { FormGroup, FormControl } from '@angular/forms';
 
 import * as fromRoot from '../../reducers';
 import * as code from '../../actions/code';
-import * as codeDialog from '../../actions/code-dialog';
+import * as dialog from '../../actions/dialog';
 import { Code } from '../../models/code';
+import { AddCodeDialogComponent } from '../add-code-dialog/add-code-dialog.component';
 
 @Component({
   selector: 'app-codes',
@@ -31,7 +32,7 @@ export class CodesComponent implements OnInit {
   }
 
   onAddNewCodeClick() {
-    this.store.dispatch(new codeDialog.OpenDialogAction());
+    this.store.dispatch(new dialog.OpenDialogAction(AddCodeDialogComponent));
   }
 
   ngOnInit() {
