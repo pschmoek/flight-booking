@@ -3,13 +3,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { MdToolbarModule,
   MdButtonModule,
-  MdListModule,
   MdProgressSpinnerModule,
-  MdGridListModule,
   MdInputModule,
   MdDialogModule,
   MdCardModule,
-  MdIconModule
+  MdIconModule,
+  MdSnackBarModule
 } from '@angular/material';
 import { RouterModule } from '@angular/router';
 import { StoreModule } from '@ngrx/store';
@@ -42,6 +41,7 @@ import { BookingService } from './services/booking.service';
 import { BookingEffects } from './effects/booking';
 import { FlightOverviewComponent } from './components/booking/flight-overview.component';
 import { PassengersTableComponent } from './components/booking/passengers-table.component';
+import { MessageEffects } from './effects/message';
 
 @NgModule({
   declarations: [
@@ -66,13 +66,12 @@ import { PassengersTableComponent } from './components/booking/passengers-table.
     ReactiveFormsModule,
     MdToolbarModule,
     MdButtonModule,
-    MdListModule,
     MdProgressSpinnerModule,
-    MdGridListModule,
     MdInputModule,
     MdDialogModule,
     MdCardModule,
     MdIconModule,
+    MdSnackBarModule,
     NgxDatatableModule,
     RouterModule.forRoot(routes),
     StoreModule.provideStore(reducer),
@@ -80,7 +79,8 @@ import { PassengersTableComponent } from './components/booking/passengers-table.
     EffectsModule.run(CodeEffects),
     EffectsModule.run(CodeDialogEffects),
     EffectsModule.run(FlightEffects),
-    EffectsModule.run(BookingEffects)
+    EffectsModule.run(BookingEffects),
+    EffectsModule.run(MessageEffects)
   ],
   providers: [
     CodeService,

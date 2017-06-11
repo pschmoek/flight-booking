@@ -7,19 +7,22 @@ import * as fromCode from './code';
 import * as fromCodeDialog from './code-dialog';
 import * as fromFlight from './flight';
 import * as fromBooking from './booking';
+import * as fromMessage from './message';
 
 export interface State {
   code: fromCode.State;
   codeDialog: fromCodeDialog.State;
   flight: fromFlight.State;
   booking: fromBooking.State;
+  message: fromMessage.State;
 }
 
 const reducers = {
   code: fromCode.reducer,
   codeDialog: fromCodeDialog.reducer,
   flight: fromFlight.reducer,
-  booking: fromBooking.reducer
+  booking: fromBooking.reducer,
+  message: fromMessage.reducer
 };
 
 const combinedReducers: ActionReducer<State> = combineReducers(reducers);
@@ -46,3 +49,8 @@ export const getBookingFlight = createSelector(getBookingState, fromBooking.getF
 export const getBookingErrorMessage = createSelector(getBookingState, fromBooking.getErrorMessage);
 export const getBookingIsLoading = createSelector(getBookingState, fromBooking.getIsLoading);
 export const getBookingIsSaving = createSelector(getBookingState, fromBooking.getIsSaving);
+
+export const getMessageState = (state: State) => state.message;
+export const getMessage = createSelector(getMessageState, fromMessage.getMessage);
+export const getIsMessageOpen = createSelector(getMessageState, fromMessage.getIsOpen);
+

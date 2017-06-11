@@ -10,6 +10,7 @@ import 'rxjs/add/observable/from';
 
 import * as code from '../actions/code';
 import * as codeDialog from '../actions/code-dialog';
+import * as message from '../actions/message';
 import { CodeService } from '../services/code.service'
 
 @Injectable()
@@ -34,7 +35,9 @@ export class CodeEffects {
     .switchMap(a => {
       return this.codeService.delete(a.payload)
         .map(c => new code.DeleteSuccessAction(c))
-        .catch(e => Observable.empty());
+        .catch(e => {
+          return Observable.of(new message.ShowMessageAction(e.json()))
+        });
     });
 
   @Effect()
