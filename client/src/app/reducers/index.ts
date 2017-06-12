@@ -2,6 +2,7 @@ import { ActionReducer } from '@ngrx/store';
 import { compose } from '@ngrx/core/compose';
 import { combineReducers } from '@ngrx/store';
 import { createSelector } from 'reselect';
+import { routerReducer, RouterState } from '@ngrx/router-store';
 
 import * as fromCode from './code';
 import * as fromFlight from './flight';
@@ -9,6 +10,7 @@ import * as fromBooking from './booking';
 import * as fromMessage from './message';
 
 export interface State {
+  router: RouterState;
   code: fromCode.State;
   flight: fromFlight.State;
   booking: fromBooking.State;
@@ -16,6 +18,7 @@ export interface State {
 }
 
 const reducers = {
+  router: routerReducer,
   code: fromCode.reducer,
   flight: fromFlight.reducer,
   booking: fromBooking.reducer,

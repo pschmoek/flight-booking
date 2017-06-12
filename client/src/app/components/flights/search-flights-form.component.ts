@@ -1,5 +1,5 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
+import { FormGroup, FormControl } from '@angular/forms';
 
 import { FlightSearchParams } from '../../models/flight-search-params';
 
@@ -41,23 +41,21 @@ import { FlightSearchParams } from '../../models/flight-search-params';
   }
   `]
 })
-export class SearchFlightsFormComponent implements OnInit {
+export class SearchFlightsFormComponent implements OnChanges {
   @Input() params: FlightSearchParams;
   @Output() submit = new EventEmitter<FlightSearchParams>();
-  form: FormGroup;
-
-  constructor(private formBuilder: FormBuilder) { }
+  form = new FormGroup({
+    from: new FormControl(),
+    to: new FormControl(),
+    code: new FormControl(),
+    date: new FormControl()
+  });
 
   onEnter() {
     this.submit.emit(this.form.value);
   }
 
-  ngOnInit() {
-    this.form = this.formBuilder.group({
-      from: this.params.from,
-      to: this.params.to,
-      code: this.params.code,
-      date: this.params.date
-    });
+  ngOnChanges(changes: SimpleChanges): void {
+    this.form.patchValue(this.params);
   }
 }

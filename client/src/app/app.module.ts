@@ -17,6 +17,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { HttpModule } from '@angular/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { routerReducer, RouterStoreModule } from '@ngrx/router-store';
 
 import { routes } from './routes';
 import { AppComponent } from './app.component';
@@ -76,6 +77,7 @@ import { MessageEffects } from './effects/message';
     NgxDatatableModule,
     RouterModule.forRoot(routes),
     StoreModule.provideStore(reducer),
+    RouterStoreModule.connectRouter(),
     StoreDevtoolsModule.instrumentOnlyWithExtension(),
     EffectsModule.run(CodeEffects),
     EffectsModule.run(FlightEffects),

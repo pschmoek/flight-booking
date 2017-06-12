@@ -10,7 +10,12 @@ export interface State {
 }
 
 export const initialState: State = {
-  currentParams: { },
+  currentParams: {
+    code: '',
+    date: '',
+    from: '',
+    to: ''
+  },
   flights: null,
   isLoading: false,
   resultsLoaded: false
