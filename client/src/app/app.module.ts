@@ -43,6 +43,7 @@ import { FlightOverviewComponent } from './components/booking/flight-overview.co
 import { PassengersTableComponent } from './components/booking/passengers-table.component';
 import { AddBookingDialogComponent } from './components/add-booking-dialog/add-booking-dialog.component';
 import { MessageEffects } from './effects/message';
+import { UpdateService } from './services/update.service';
 
 @NgModule({
   declarations: [
@@ -88,7 +89,8 @@ import { MessageEffects } from './effects/message';
     CodeService,
     TransformTimeService,
     FlightService,
-    BookingService
+    BookingService,
+    UpdateService
   ],
   entryComponents: [
     AddCodeDialogComponent,

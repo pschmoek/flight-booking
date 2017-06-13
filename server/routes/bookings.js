@@ -1,14 +1,22 @@
-const express = require('express');
-const router = express.Router();
-const bookingService = require('../services/booking');
+/**
+ * @param {SocketIO.Server} io
+ * @return {Router}
+ */
+module.exports = (io) => {
 
-router.post('/', async (req, res) => {
-  try {
-    const booking = await bookingService.addBooking(req.body);
-    res.status(201).json(booking);
-  } catch(e) {
-    res.status(400).json(e);
-  }
-});
+  const express = require('express');
+  const router = express.Router();
+  const bookingService = require('../services/booking');
 
-module.exports = router;
+  router.post('/', async (req, res) => {
+    try {
+      const booking = await bookingService.addBooking(req.body);
+      io.emit('new-booking', booking);
+      res.status(201).json(booking);
+    } catch(e) {
+      res.status(400).json(e);
+    }
+  });
+
+  return router;
+}
