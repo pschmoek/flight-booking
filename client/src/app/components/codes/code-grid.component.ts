@@ -12,8 +12,11 @@ import { Code } from '../../models/code';
   [headerHeight]="40"
   [rowHeight]="60"
   [footerHeight]="40">
-  <ngx-datatable-column [width]="70" [minWidth]="70" [maxWidth]="70" name="">
+  <ngx-datatable-column [width]="120" [minWidth]="120" [maxWidth]="120" name="">
     <ng-template let-row="row" ngx-datatable-cell-template>
+      <button md-icon-button (click)="searchCodeClick.emit(row)">
+        <md-icon style="font-size: 20px">search</md-icon>
+      </button>
       <button md-icon-button (click)="deleteCode.emit(row)">
         <md-icon style="font-size: 20px">delete</md-icon>
       </button>
@@ -47,4 +50,5 @@ export class CodeGridComponent {
   @Input() codes: Code[];
   @Output() deleteCode = new EventEmitter<Code>();
   @Output() addNewCodeClick = new EventEmitter();
+  @Output() searchCodeClick = new EventEmitter<Code>();
 }
