@@ -16,8 +16,8 @@ module.exports = (io) => {
   router.post('/', async (req, res) => {
     try {
       const code = await codeService.addCode(req.body);
-      io.emit('new-code', code);
       res.status(201).json(code);
+      io.emit('new-code', code);
     } catch (e) {
       res.status(400).json(e);
     }
@@ -26,8 +26,8 @@ module.exports = (io) => {
   router.delete('/:id', async (req,res) => {
     try {
       const code = await codeService.delete(req.params.id);
-      io.emit('deleted-code', code.id);
       res.json(code);
+      io.emit('deleted-code', code.id);
     } catch (e) {
       res.status(400).json(e);
     }

@@ -31,8 +31,8 @@ module.exports = (io) => {
   router.post('/', async (req, res) => {
     try {
       const flight = await flightService.addFlight(req.body);
-      io.emit('new-flight', flight);
       res.status(201).location(`${req.baseUrl}/${flight.id}`).json(flight);      
+      io.emit('new-flight', flight);
     } catch (e) {
       res.status(400).json(e);
     }
