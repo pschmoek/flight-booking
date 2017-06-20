@@ -4,7 +4,6 @@ import { MdSnackBar } from '@angular/material';
 
 import * as code from './actions/code';
 import * as fromRoot from './reducers';
-import { UpdateService } from './services/update.service';
 
 @Component({
   selector: 'app-root',
@@ -17,8 +16,7 @@ import { UpdateService } from './services/update.service';
   `
 })
 export class AppComponent {
-  constructor(private store: Store<fromRoot.State>, private snackBar: MdSnackBar,
-    private updateService: UpdateService) {
+  constructor(private store: Store<fromRoot.State>, private snackBar: MdSnackBar) {
     this.store.select(fromRoot.getMessageState).subscribe(s => {
       if (s.isVisible) {
         this.snackBar.open(s.message);
@@ -26,7 +24,5 @@ export class AppComponent {
         this.snackBar.dismiss();
       }
     });
-
-    this.updateService.getUpdates().subscribe(u => console.log(u));
   }
 }
