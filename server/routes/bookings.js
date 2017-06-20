@@ -11,8 +11,8 @@ module.exports = (io) => {
   router.post('/', async (req, res) => {
     try {
       const booking = await bookingService.addBooking(req.body);
-      io.emit('new-booking', booking);
       res.status(201).json(booking);
+      io.emit('new-booking', booking);
     } catch(e) {
       res.status(400).json(e);
     }

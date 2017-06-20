@@ -11,6 +11,7 @@ export const ADD_BOOKING_TO_FLIGHT_SUCCESS =  '[Booking] Add Booking To Flight S
 export const ADD_BOOKING_TO_FLIGHT_FAILURE =  '[Booking] Add Booking To Flight Failure';
 export const OPEN_MODAL =                     '[Booking] Open Modal';
 export const CLOSE_MODAL =                    '[Booking] Close Modal';
+export const NEW_BOOKING_ON_SERVER =          '[Booking] New Booking On Server';
 
 export class LoadFlightAction implements Action {
   readonly type = LOAD_FLIGHT;
@@ -56,6 +57,12 @@ export class CloseModalAction implements Action {
   readonly type = CLOSE_MODAL;
 }
 
+export class NewBookingOnServerAction implements Action {
+  readonly type = NEW_BOOKING_ON_SERVER;
+
+  constructor(public payload: Booking) { }
+}
+
 export type Actions
   = LoadFlightAction
   | LoadFlightSuccessAction
@@ -64,4 +71,5 @@ export type Actions
   | AddBookingToFlightSuccessAction
   | AddBookingToFlightFailureAction
   | OpenModalAction
-  | CloseModalAction;
+  | CloseModalAction
+  | NewBookingOnServerAction;

@@ -71,6 +71,23 @@ export function reducer(state = initialState, action: booking.Actions): State {
       }
     }
 
+    case booking.NEW_BOOKING_ON_SERVER: {
+      if (state.flight && state.flight.id === action.payload.flightId) {
+        const booking: Booking = action.payload;
+        if (!state.flight.bookings.find(b => b.id === booking.id)) {
+          state.flight.bookings = [...state.flight.bookings, booking];
+          
+          return {
+            isLoading: state.isLoading,
+            isModalOpen: state.isModalOpen,
+            flight: state.flight
+          }
+        }
+      } else {
+        return state;
+      }
+    }
+
     default: {
       return state;
     }
