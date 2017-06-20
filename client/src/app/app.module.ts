@@ -22,7 +22,6 @@ import { routerReducer, RouterStoreModule } from '@ngrx/router-store';
 import { routes } from './routes';
 import { AppComponent } from './app.component';
 import { CodesComponent } from './components/codes/codes.component';
-import { OverviewComponent } from './components/overview/overview.component';
 import { reducer } from './reducers';
 import { CodeService } from './services/code.service';
 import { CodeEffects } from './effects/code';
@@ -49,7 +48,6 @@ import { UpdateService } from './services/update.service';
   declarations: [
     AppComponent,
     CodesComponent,
-    OverviewComponent,
     DepartureTimePipe,
     SpinnerComponent,
     CodeGridComponent,

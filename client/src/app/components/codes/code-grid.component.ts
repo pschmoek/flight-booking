@@ -15,7 +15,7 @@ import { Code } from '../../models/code';
   <ngx-datatable-column [width]="70" [minWidth]="70" [maxWidth]="70" name="">
     <ng-template let-row="row" ngx-datatable-cell-template>
       <button md-icon-button (click)="deleteCode.emit(row)">
-        <md-icon>delete</md-icon>
+        <md-icon style="font-size: 20px">delete</md-icon>
       </button>
     </ng-template>
   </ngx-datatable-column>

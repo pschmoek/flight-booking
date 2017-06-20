@@ -10,7 +10,6 @@ import { UpdateService } from './services/update.service';
   selector: 'app-root',
   template: `
 <md-toolbar color="primary">
-  <a md-button [routerLink]="['/']">Overview</a>
   <a md-button [routerLink]="['/codes']">Codes</a>
   <a md-button [routerLink]="['/flights']">Flights</a>
 </md-toolbar>
