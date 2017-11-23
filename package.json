@@ -14,7 +14,7 @@
   },
   "license": "MIT",
   "engines": {
-    "node": "8.1.2"
+    "node": ">=8.0.0"
   },
   "devDependencies": {
     "concurrently": "^3.5.0"
